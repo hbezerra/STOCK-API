@@ -28,4 +28,9 @@ public class ProductService {
     public List<Product> getAllProducts() {
         return repository.findAll();
     }
+
+    public void deleteProduct(Long id) {
+        repository.deleteById(id);
+    }
+
 }
