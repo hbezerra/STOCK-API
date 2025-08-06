@@ -5,11 +5,13 @@ import com.stock.repository.ProductRepository;
 import com.stock.util.ProductValidator;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductService {
 
-    private ProductRepository repository;
-    private ProductValidator validator ;
+    private final ProductRepository repository;
+    private final ProductValidator validator ;
 
     public ProductService(ProductRepository productRepository, ProductValidator productValidator) {
         this.repository = productRepository;
@@ -23,4 +25,7 @@ public class ProductService {
         return repository.save(product);
     }
 
+    public List<Product> getAllProducts() {
+        return repository.findAll();
+    }
 }
