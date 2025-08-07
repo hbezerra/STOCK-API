@@ -35,11 +35,26 @@ public class ProductService {
     }
 
     public Product updateProduct(Long id, Product product) {
-        Product productUpdate = repository.findById(id).orElseThrow(() -> new ProductException("Error updating product. The ID entered is invalid"));
+        Product productUpdate = validator.findProductById(id);
         validator.validateProduct(product);
         productUpdate.setName(product.getName());
         productUpdate.setDescription(product.getDescription());
         productUpdate.setQuantity(product.getQuantity());
+        return repository.save(productUpdate);
+    }
+
+    public Product incrementQuantityProduct(Long id, Integer quantity) {
+        validator.validateQuantity(quantity);
+        Product productUpdate = validator.findProductById(id);
+        productUpdate.setQuantity(productUpdate.getQuantity() + quantity);
+        return repository.save(productUpdate);
+    }
+
+    public Product decrementQuantityProduct(Long id, Integer quantity) {
+        validator.validateQuantity(quantity);
+        Product productUpdate = validator.findProductById(id);
+        validator.validateQuantityDecrement(productUpdate.getQuantity(), quantity);
+        productUpdate.setQuantity(productUpdate.getQuantity() - quantity);
         return repository.save(productUpdate);
     }
 

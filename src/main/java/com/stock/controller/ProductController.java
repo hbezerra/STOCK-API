@@ -52,5 +52,26 @@ public class ProductController {
         }
     }
 
+    @PutMapping("/increment/{id}")
+    public ResponseEntity<?> incrementQuantityProduct(@PathVariable("id") Long id, @RequestBody Integer quantity) {
+        try {
+            Product productUpdate = service.incrementQuantityProduct(id, quantity);
+            return ResponseEntity.ok(productUpdate);
+        }
+        catch(ProductException e) {
+            return  ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/decrement/{id}")
+    public ResponseEntity<?> decrementQuantityProduct(@PathVariable("id") Long id, @RequestBody Integer quantity) {
+        try {
+            Product productUpdate = service.decrementQuantityProduct(id, quantity);
+            return ResponseEntity.ok(productUpdate);
+        }
+        catch(ProductException e) {
+            return  ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 
 }

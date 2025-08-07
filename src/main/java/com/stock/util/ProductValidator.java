@@ -25,6 +25,22 @@ public class ProductValidator {
         }
     }
 
+    public void validateQuantity(Integer quantity) {
+        if(quantity <= 0) {
+            throw new ProductException("Error performing the operation! The quantity must be greater than 0");
+        }
+    }
+
+    public Product findProductById(Long id) {
+        return repository.findById(id).orElseThrow(() -> new ProductException("Error updating product. The ID entered is invalid"));
+    }
+
+    public void validateQuantityDecrement(Integer quantityInitial, Integer quantityDecrement) {
+        if(quantityInitial - quantityDecrement < 0) {
+            throw new ProductException("Error when decreasing quantity! The quantity cannot be negative");
+        }
+    }
+
     // public void productExistsById(Long id) {
         // if(!repository.existsById(id)) {
            // throw new ProductException("Error updating product. The ID entered is invalid");
