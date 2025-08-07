@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProductValidator {
 
-    private ProductRepository repository ;
+    private final ProductRepository repository ;
 
     public ProductValidator(ProductRepository productRepository){
         this.repository = productRepository;
@@ -24,5 +24,11 @@ public class ProductValidator {
             throw new ProductException("Error adding product! The quantity must be greater than 0");
         }
     }
+
+    // public void productExistsById(Long id) {
+        // if(!repository.existsById(id)) {
+           // throw new ProductException("Error updating product. The ID entered is invalid");
+        // }
+    // }
 
 }

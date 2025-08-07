@@ -1,5 +1,6 @@
 package com.stock.service;
 
+import com.stock.exception.ProductException;
 import com.stock.model.Product;
 import com.stock.repository.ProductRepository;
 import com.stock.util.ProductValidator;
@@ -31,6 +32,15 @@ public class ProductService {
 
     public void deleteProduct(Long id) {
         repository.deleteById(id);
+    }
+
+    public Product updateProduct(Long id, Product product) {
+        Product productUpdate = repository.findById(id).orElseThrow(() -> new ProductException("Error updating product. The ID entered is invalid"));
+        validator.validateProduct(product);
+        productUpdate.setName(product.getName());
+        productUpdate.setDescription(product.getDescription());
+        productUpdate.setQuantity(product.getQuantity());
+        return repository.save(productUpdate);
     }
 
 }
