@@ -40,11 +40,4 @@ public class ProductValidator {
             throw new ProductException("Error when decreasing quantity! The quantity cannot be negative");
         }
     }
-
-    // public void productExistsById(Long id) {
-        // if(!repository.existsById(id)) {
-           // throw new ProductException("Error updating product. The ID entered is invalid");
-        // }
-    // }
-
 }
